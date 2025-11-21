@@ -54,6 +54,7 @@ function custom_media_register_cpts() {
             'show_in_rest'        => true,
             'publicly_queryable'  => true,
             'rewrite'             => [ 'slug' => $slug ],
+            'show_in_nav_menus'   => true,
         ] );
     }
 }

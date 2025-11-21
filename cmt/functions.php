@@ -235,15 +235,14 @@ function custom_media_register_acf_fields() {
                         'default_value' => '詳しく見る',
                     ],
                 ],
-                'location' => 'options_page',
             ],
         ],
         'location' => [
             [
                 [
-                    'param'    => 'options_page',
+                    'param'    => 'page_type',
                     'operator' => '==',
-                    'value'    => 'custom-media-home-settings',
+                    'value'    => 'front_page',
                 ],
             ],
         ],

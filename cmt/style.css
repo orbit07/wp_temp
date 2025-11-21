@@ -240,12 +240,7 @@ a:hover {
 }
 
 .section-block {
-  padding: 56px 22px;
-  margin: 28px auto;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid #e3eafe;
-  border-radius: 18px;
-  box-shadow: 0 22px 60px rgba(10, 35, 82, 0.14);
+  padding: 48px 0;
 }
 
 .section-header {
@@ -254,42 +249,20 @@ a:hover {
   align-items: baseline;
   gap: 12px;
   margin-bottom: 20px;
-  position: relative;
-}
-
-.section-header::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -8px;
-  width: 60px;
-  height: 3px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
-}
-
-.section-header h2 {
-  margin: 0;
-  font-size: 24px;
-  letter-spacing: 0.02em;
 }
 
 .eyebrow {
   font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--accent);
+  letter-spacing: 0.04em;
+  color: #0f1f3d;
   margin: 0;
-  text-transform: uppercase;
 }
 
 .hero-carousel {
-  padding: 16px 0 40px;
-  background: radial-gradient(circle at 15% 20%, rgba(0, 102, 255, 0.08), transparent 45%),
-    radial-gradient(circle at 85% 10%, rgba(0, 181, 226, 0.1), transparent 38%),
-    linear-gradient(120deg, #e6f1ff, #f7fbff);
+  padding: 0 0 24px;
+  background: linear-gradient(120deg, #e6f1ff, #f7fbff);
   overflow: hidden;
-  position: relative;
 }
 
 [data-carousel] .carousel-track {
@@ -310,7 +283,6 @@ a:hover {
 
 .hero-carousel .carousel-track {
   gap: 32px;
-  align-items: stretch;
 }
 
 .carousel-nav {
@@ -318,16 +290,15 @@ a:hover {
   align-items: center;
   justify-content: center;
   gap: 12px;
-  margin-top: 20px;
+  margin-top: 16px;
 }
 
 .carousel-nav__btn {
-  border: 1px solid #dbe7ff;
-  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid #d8dde5;
+  background: #fff;
   padding: 10px 14px;
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: pointer;
-  box-shadow: 0 10px 24px rgba(10, 35, 82, 0.16);
 }
 
 .carousel-dots {
@@ -337,18 +308,17 @@ a:hover {
 }
 
 .carousel-dots button {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  border: 1px solid rgba(0, 102, 255, 0.55);
-  background: rgba(0, 102, 255, 0.08);
+  border: 1px solid #0b6dff;
+  background: transparent;
   padding: 0;
   cursor: pointer;
 }
 
 .carousel-dots button.is-active {
-  background: var(--accent);
-  box-shadow: 0 0 0 6px rgba(0, 102, 255, 0.08);
+  background: #0b6dff;
 }
 
 .hero-slide {
@@ -356,27 +326,20 @@ a:hover {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   align-items: center;
   gap: 24px;
-  padding: 40px 0;
+  padding: 32px 0;
 }
 
 .hero-slide__media {
   width: 100%;
-  padding-top: 62%;
-  border-radius: 18px;
+  padding-top: 60%;
+  border-radius: 16px;
   background-size: cover;
   background-position: center;
-  box-shadow: 0 18px 48px rgba(15, 31, 61, 0.2);
+  box-shadow: 0 14px 40px rgba(15, 31, 61, 0.15);
 }
 
 .hero-carousel .hero-slide__body {
   text-align: left;
-  background: rgba(255, 255, 255, 0.82);
-  border: 1px solid #dbe7ff;
-  border-left: 4px solid var(--accent);
-  border-radius: 16px;
-  padding: 20px 24px;
-  box-shadow: 0 18px 48px rgba(10, 35, 82, 0.1);
-  backdrop-filter: blur(6px);
 }
 
 .hero-slide__body h1 {
@@ -398,19 +361,18 @@ a:hover {
 .card .tags a {
   display: inline-block;
   padding: 4px 8px;
-  border: 1px solid rgba(0, 102, 255, 0.2);
+  border: 1px solid #e5e8ec;
   border-radius: 999px;
   font-size: 12px;
   color: #0f1f3d;
-  background: rgba(0, 102, 255, 0.08);
+  background: #f5f7fa;
 }
 
 .tag-cloud {
   padding: 16px;
-  border: 1px solid #e3eafe;
-  border-radius: 14px;
-  background: linear-gradient(145deg, #f8fbff, #eef4ff);
-  box-shadow: 0 12px 32px rgba(10, 35, 82, 0.08);
+  border: 1px solid #e5e8ec;
+  border-radius: 12px;
+  background: #f9fbff;
 }
 
 .tag-cloud a {
@@ -418,16 +380,15 @@ a:hover {
   padding: 6px 10px;
   margin: 6px;
   border-radius: 10px;
-  background: rgba(0, 102, 255, 0.08);
+  background: #eef3ff;
   color: #0f1f3d;
-  border: 1px solid rgba(0, 102, 255, 0.18);
+  border: 1px solid #d8e4ff;
 }
 
 .newsletter {
-  background: linear-gradient(135deg, #0056d7, #001a4d);
+  background: linear-gradient(135deg, #0b6dff, #0f1f3d);
   color: #fff;
-  border-radius: 18px;
-  box-shadow: 0 20px 50px rgba(0, 39, 120, 0.35);
+  border-radius: 16px;
 }
 
 .newsletter__body {
@@ -440,7 +401,6 @@ a:hover {
 .newsletter__cta .button {
   background: #fff;
   color: #0f1f3d;
-  box-shadow: none;
 }
 
 .event-meta,

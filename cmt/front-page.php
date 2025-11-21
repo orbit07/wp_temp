@@ -5,7 +5,19 @@
 
 get_header();
 
-$slides = function_exists( 'get_field' ) ? get_field( 'home_slides', 'option' ) : [];
+$home_source_id = get_queried_object_id() ?: get_option( 'page_on_front' );
+
+$slides = [];
+if ( function_exists( 'get_field' ) ) {
+    if ( $home_source_id ) {
+        $slides = get_field( 'home_slides', $home_source_id ) ?: [];
+    }
+
+    if ( empty( $slides ) ) {
+        // 以前のオプションページ保存データがあれば引き継ぐ。
+        $slides = get_field( 'home_slides', 'option' ) ?: [];
+    }
+}
 
 if ( empty( $slides ) ) {
     $fallback = new WP_Query( [
@@ -255,6 +267,40 @@ if ( empty( $slides ) ) {
             <a class="button" href="#cta-contact"><?php esc_html_e( '登録する', 'custom-media' ); ?></a>
         </div>
     </div>
+    <?php
+    $cases = new WP_Query( [
+        'post_type'      => 'case',
+        'posts_per_page' => 10,
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+    ] );
+    ?>
+    <?php if ( $cases->have_posts() ) : ?>
+        <div class="card-carousel" data-carousel data-visible="3" data-autoplay="false">
+            <div class="carousel-track">
+                <?php while ( $cases->have_posts() ) : $cases->the_post(); ?>
+                    <article class="card">
+                        <a href="<?php the_permalink(); ?>" class="card__link">
+                            <?php if ( has_post_thumbnail() ) : ?>
+                                <?php the_post_thumbnail( 'medium' ); ?>
+                            <?php endif; ?>
+                            <div class="card-body">
+                                <h3><?php the_title(); ?></h3>
+                                <div class="tags"><?php the_tags( '', ' ' ); ?></div>
+                            </div>
+                        </a>
+                    </article>
+                <?php endwhile; wp_reset_postdata(); ?>
+            </div>
+            <div class="carousel-nav">
+                <button class="carousel-nav__btn" data-prev><?php esc_html_e( '前へ', 'custom-media' ); ?></button>
+                <div class="carousel-dots"></div>
+                <button class="carousel-nav__btn" data-next><?php esc_html_e( '次へ', 'custom-media' ); ?></button>
+            </div>
+        </div>
+    <?php else : ?>
+        <p><?php esc_html_e( '事例がありません。', 'custom-media' ); ?></p>
+    <?php endif; ?>
 </section>
 
 <section class="container section-block">

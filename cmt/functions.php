@@ -100,6 +100,16 @@ function custom_media_register_acf_fields() {
         return;
     }
 
+    if ( function_exists( 'acf_add_options_page' ) ) {
+        acf_add_options_page( [
+            'page_title' => __( 'ホーム設定', 'custom-media' ),
+            'menu_title' => __( 'ホーム設定', 'custom-media' ),
+            'menu_slug'  => 'custom-media-home-settings',
+            'capability' => 'manage_options',
+            'redirect'   => false,
+        ] );
+    }
+
     acf_add_local_field_group( [
         'key'    => 'group_layout_type',
         'title'  => 'レイアウト選択',
@@ -144,6 +154,120 @@ function custom_media_register_acf_fields() {
                     'param'    => 'post_type',
                     'operator' => '==',
                     'value'    => 'movie',
+                ],
+            ],
+        ],
+    ] );
+
+    acf_add_local_field_group( [
+        'key'    => 'group_home_visual',
+        'title'  => 'ホームメインビジュアル',
+        'fields' => [
+            [
+                'key'          => 'field_home_slides',
+                'label'        => 'メインビジュアルスライド',
+                'name'         => 'home_slides',
+                'type'         => 'repeater',
+                'instructions' => '任意の投稿、固定ページ、またはリンクバナーを設定してください。',
+                'button_label' => 'スライドを追加',
+                'min'          => 1,
+                'sub_fields'   => [
+                    [
+                        'key'     => 'field_home_slide_source',
+                        'label'   => 'スライドタイプ',
+                        'name'    => 'slide_source',
+                        'type'    => 'select',
+                        'choices' => [
+                            'post'   => '投稿 / 固定ページ / カスタム投稿',
+                            'custom' => 'バナーリンク',
+                        ],
+                        'default_value' => 'post',
+                    ],
+                    [
+                        'key'           => 'field_home_slide_post',
+                        'label'         => '関連投稿',
+                        'name'          => 'slide_post',
+                        'type'          => 'post_object',
+                        'post_type'     => [ 'post', 'page', 'case', 'document', 'movie', 'service', 'event' ],
+                        'return_format' => 'id',
+                        'ui'            => 1,
+                        'conditional_logic' => [
+                            [
+                                [
+                                    'field'    => 'field_home_slide_source',
+                                    'operator' => '==',
+                                    'value'    => 'post',
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'key'   => 'field_home_slide_subtitle',
+                        'label' => 'サブタイトル',
+                        'name'  => 'slide_subtitle',
+                        'type'  => 'text',
+                    ],
+                    [
+                        'key'   => 'field_home_slide_title',
+                        'label' => 'タイトル上書き',
+                        'name'  => 'slide_title',
+                        'type'  => 'text',
+                    ],
+                    [
+                        'key'           => 'field_home_slide_image',
+                        'label'         => 'メイン画像',
+                        'name'          => 'slide_image',
+                        'type'          => 'image',
+                        'return_format' => 'array',
+                    ],
+                    [
+                        'key'   => 'field_home_slide_link',
+                        'label' => 'リンク先URL',
+                        'name'  => 'slide_link',
+                        'type'  => 'url',
+                        'instructions' => 'バナーリンクの場合は必須。投稿指定時は未入力で自動設定。',
+                    ],
+                    [
+                        'key'   => 'field_home_slide_cta',
+                        'label' => 'ボタンテキスト',
+                        'name'  => 'slide_cta',
+                        'type'  => 'text',
+                        'default_value' => '詳しく見る',
+                    ],
+                ],
+                'location' => 'options_page',
+            ],
+        ],
+        'location' => [
+            [
+                [
+                    'param'    => 'options_page',
+                    'operator' => '==',
+                    'value'    => 'custom-media-home-settings',
+                ],
+            ],
+        ],
+    ] );
+
+    acf_add_local_field_group( [
+        'key'    => 'group_service_order',
+        'title'  => 'サービス並び順',
+        'fields' => [
+            [
+                'key'           => 'field_service_order',
+                'label'         => '表示順',
+                'name'          => 'service_order',
+                'type'          => 'number',
+                'instructions'  => '数値が小さいものから表示されます。',
+                'default_value' => 0,
+            ],
+        ],
+        'location' => [
+            [
+                [
+                    'param'    => 'post_type',
+                    'operator' => '==',
+                    'value'    => 'service',
                 ],
             ],
         ],

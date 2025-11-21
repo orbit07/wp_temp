@@ -100,6 +100,16 @@ function custom_media_register_acf_fields() {
         return;
     }
 
+    if ( function_exists( 'acf_add_options_page' ) ) {
+        acf_add_options_page( [
+            'page_title' => __( 'ホーム設定', 'custom-media' ),
+            'menu_title' => __( 'ホーム設定', 'custom-media' ),
+            'menu_slug'  => 'custom-media-home-settings',
+            'capability' => 'manage_options',
+            'redirect'   => false,
+        ] );
+    }
+
     acf_add_local_field_group( [
         'key'    => 'group_layout_type',
         'title'  => 'レイアウト選択',

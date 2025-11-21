@@ -66,7 +66,7 @@ if ( empty( $slides ) ) {
                 </article>
             <?php endforeach; ?>
         </div>
-        <?php if ( count( $slides ) > 3 ) : ?>
+        <?php if ( count( $slides ) > 1 ) : ?>
             <div class="carousel-nav">
                 <button class="carousel-nav__btn" data-prev><?php esc_html_e( '前へ', 'custom-media' ); ?></button>
                 <div class="carousel-dots"></div>

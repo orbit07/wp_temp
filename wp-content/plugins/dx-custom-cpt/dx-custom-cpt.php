@@ -25,28 +25,52 @@ function dx_register_custom_post_types() {
 
     foreach ( $post_types as $slug => $label ) {
 
-        $args = array(
-            'label'           => $label,
-            'labels'          => array(
-                'name'          => $label,
-                'singular_name' => $label,
-                'add_new'       => $label . 'を追加',
-                'add_new_item'  => $label . 'を追加',
-                'edit_item'     => $label . 'を編集',
-                'new_item'      => '新しい' . $label,
-                'view_item'     => $label . 'を表示',
-                'search_items'  => $label . 'を検索',
-                'not_found'     => $label . 'が見つかりません。',
-            ),
-            'public'          => true,
-            'has_archive'     => true,
-            'show_in_rest'    => true,
-            'menu_position'   => 20,
-            'menu_icon'       => 'dashicons-media-document',
-            'supports'        => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
-            'rewrite'         => array( 'slug' => $slug, 'with_front' => false ),
-        );
+        // ▼ service だけ別設定を与える
+        if ( $slug === 'service' ) {
 
+            $args = array(
+                'label'           => $label,
+                'labels'          => array(
+                    'name'          => $label,
+                    'singular_name' => $label,
+                ),
+                'public'          => true,
+
+                // 🔥 一覧ページは固定ページに任せるので false
+                'has_archive'     => false,
+
+                'show_in_rest'    => true,
+                'menu_position'   => 20,
+                'menu_icon'       => 'dashicons-media-document',
+                'supports'        => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
+
+                // 🔥 固定ページ /service/ と同じ slug を使う
+                //    （ただし has_archive が false なので競合しない）
+                'rewrite'         => array( 'slug' => 'service', 'with_front' => false ),
+            );
+
+        } else {
+
+            // ▼ その他の C P T（case/document/movie/event）
+            $args = array(
+                'label'           => $label,
+                'labels'          => array(
+                    'name'          => $label,
+                    'singular_name' => $label,
+                ),
+                'public'          => true,
+                'has_archive'     => true,
+                'show_in_rest'    => true,
+                'menu_position'   => 20,
+                'menu_icon'       => 'dashicons-media-document',
+                'supports'        => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
+
+                // slug は各 CPT のスラッグのまま
+                'rewrite'         => array( 'slug' => $slug, 'with_front' => false ),
+            );
+        }
+
+        // イベントの追加サポート
         if ( 'event' === $slug ) {
             $args['supports'][] = 'custom-fields';
         }

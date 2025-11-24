@@ -79,3 +79,17 @@ function dx_register_custom_post_types() {
     }
 }
 add_action( 'init', 'dx_register_custom_post_types' );
+
+/**
+ * Prevent archives for the service post type.
+ */
+function dx_disable_service_archive( $query ) {
+    if ( is_admin() || ! $query->is_main_query() ) {
+        return;
+    }
+
+    if ( $query->is_post_type_archive( 'service' ) ) {
+        $query->set_404();
+    }
+}
+add_action( 'pre_get_posts', 'dx_disable_service_archive' );

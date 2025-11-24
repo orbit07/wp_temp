@@ -4,20 +4,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Redirect service archive to a static page (service-archive).
- */
-function dx_redirect_service_archive_to_page() {
-    if ( is_post_type_archive( 'service' ) ) {
-        $page = get_page_by_path( 'service-archive' );
-        if ( $page ) {
-            wp_redirect( get_permalink( $page ) );
-            exit;
-        }
-    }
-}
-add_action( 'template_redirect', 'dx_redirect_service_archive_to_page' );
-
-/**
  * Customize Astra archive loop to use our own template parts.
  */
 function dx_setup_custom_archive_loop() {

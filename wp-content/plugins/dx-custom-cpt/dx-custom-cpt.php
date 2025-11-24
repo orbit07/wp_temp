@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DX Custom Post Types
  * Description: Registers custom post types for the DX site (service, case, document, movie, event).
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Your Name
  */
 

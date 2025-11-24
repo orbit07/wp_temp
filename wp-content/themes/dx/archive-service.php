@@ -24,6 +24,9 @@ setup_postdata( $page );
 
     <?php astra_primary_content_top(); ?>
 
+    <!-- 🔥 これがパンくずを表示するために絶対必要 -->
+    <?php astra_archive_header(); ?>
+
     <article>
         <div class="entry-content">
             <?php the_content(); ?>

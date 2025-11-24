@@ -8,29 +8,32 @@ get_header();
 // 固定ページ "service" を取得
 $page = get_page_by_path( 'service' );
 
-if ( $page ) :
-    // 固定ページの内容を表示するため WP_Query を上書き
-    setup_postdata( $page );
-    ?>
+// WP_Post が見つからない場合のフォールバック
+if ( ! $page instanceof WP_Post ) {
+    echo '<p>固定ページ「サービス」が見つかりません。</p>';
+    get_footer();
+    exit;
+}
 
-    <div id="primary" <?php astra_primary_class(); ?>>
+// WordPress のループ環境を固定ページに差し替え
+$GLOBALS['post'] = $page;
+setup_postdata( $page );
+?>
 
-        <?php astra_primary_content_top(); ?>
+<div id="primary" <?php astra_primary_class(); ?>>
 
-        <article id="post-<?php echo $page->ID; ?>" <?php post_class(); ?>>
-            <div class="entry-content">
-                <?php echo apply_filters( 'the_content', $page->post_content ); ?>
-            </div>
-        </article>
+    <?php astra_primary_content_top(); ?>
 
-        <?php astra_primary_content_bottom(); ?>
+    <article>
+        <div class="entry-content">
+            <?php the_content(); ?>
+        </div>
+    </article>
 
-    </div>
+    <?php astra_primary_content_bottom(); ?>
 
-<?php else : ?>
+</div>
 
-    <p>固定ページ「サービス」が見つかりません。</p>
-
-<?php endif;
-
+<?php
+wp_reset_postdata();
 get_footer();

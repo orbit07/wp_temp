@@ -180,3 +180,29 @@ add_action( 'wp_head', function() {
     }
 
 });
+
+/**
+ * タグ（tag）アーカイブで、全ての投稿タイプを検索対象にする
+ */
+function dx_expand_tag_query( $query ) {
+
+    if ( is_admin() || ! $query->is_main_query() ) {
+        return;
+    }
+
+    // タグアーカイブ
+    if ( $query->is_tag() ) {
+        $query->set(
+            'post_type',
+            array(
+                'post',
+                'service',
+                'case',
+                'document',
+                'movie',
+                'event'
+            )
+        );
+    }
+}
+add_action( 'pre_get_posts', 'dx_expand_tag_query' );

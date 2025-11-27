@@ -50,6 +50,9 @@ function dx_register_custom_post_types() {
             // title, editor, thumbnail, excerpt は共通
             'supports'        => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
 
+            // 追加：タグを共有する
+            'taxonomies'      => array( 'post_tag' ),
+
             // URL は CPT スラッグそのもの（/service/, /case/, ...）
             'rewrite'         => array(
                 'slug'       => $slug,
